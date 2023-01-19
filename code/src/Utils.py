@@ -79,7 +79,7 @@ class RemakeCOCOformat():
                 
 
         if self.labeling_schme:
-            cates = [{"id":i+1, "name":v}for i,v in enumerate(self.labeling_schme)]
+            cates = [{"id":i+1, "name":v} for i,v in enumerate(self.labeling_schme)]
             if self.task == 'part':
                 cates.append({"id":len(self.labeling_schme)+1, "name":'etc'})
             train['categories']= cates
@@ -100,28 +100,28 @@ class RemakeCOCOformat():
         train = self.rebuilding(train, train_imgs)
         print(len(train['images'])) 
         
-        if not os.path.exists("data/datainfo"):
-            os.makedirs("data/datainfo")
+        if not os.path.exists("../../data/datainfo"):
+            os.makedirs("../../data/datainfo")
             
-        if not os.path.exists("data/result_log"):
-            os.makedirs("data/result_log")
+        if not os.path.exists("../../data/result_log"):
+            os.makedirs("../../data/result_log")
             
-        if not os.path.exists("data/weight"):
-            os.makedirs("data/weight")
+        if not os.path.exists("../../data/weight"):
+            os.makedirs("../../data/weight")
             
-        if not os.path.exists("data/Dataset/1.원천데이터/damage"):
-            os.makedirs("data/Dataset/1.원천데이터/damage")
+        if not os.path.exists("../../data/Dataset/1.원천데이터/VS_damage"):
+            os.makedirs("../../data/Dataset/1.원천데이터/VS_damage")
         
-        if not os.path.exists("data/Dataset/1.원천데이터/damage_part"):
-            os.makedirs("data/Dataset/1.원천데이터/damage_part")
+        if not os.path.exists("../../data/Dataset/1.원천데이터/VS_damage_part"):
+            os.makedirs("../../data/Dataset/1.원천데이터/VS_damage_part")
         
-        if not os.path.exists("data/Dataset/2.라벨링데이터/damage"):
-            os.makedirs("data/Dataset/2.라벨링데이터/damage")
+        if not os.path.exists("../../data/Dataset/2.라벨링데이터/VL_damage"):
+            os.makedirs("../../data/Dataset/2.라벨링데이터/VL_damage")
         
-        if not os.path.exists("data/Dataset/2.라벨링데이터/damage_part"):
-            os.makedirs("data/Dataset/2.라벨링데이터/damage_part")
+        if not os.path.exists("../../data/Dataset/2.라벨링데이터/VL_damage_part"):
+            os.makedirs("../../data/Dataset/2.라벨링데이터/VL_damage_part")
 
-        self.save_json(train, os.path.join("data/datainfo" ,self.train_fn + ".json"))
+        self.save_json(train, os.path.join("../../data/datainfo" ,self.train_fn + ".json"))
         
 
 
@@ -235,8 +235,8 @@ if __name__ == "__main__":
             print("make_cocoformat[part]")
             label_df = pd.read_csv('code/part_labeling.csv')
 
-            dir_name_img = 'data/Dataset/1.원천데이터/damage_part'
-            dir_name_label = 'data/Dataset/2.라벨링데이터/damage_part'
+            dir_name_img = '../../data/Dataset/1.원천데이터/VS_damage_part'
+            dir_name_label = '../../data/Dataset/2.라벨링데이터/VL_damage_part'
             l_sch = ["Front bumper","Rear bumper","Front fender(R)","Front fender(L)","Rear fender(R)","Trunk lid","Bonnet","Rear fender(L)","Rear door(R)","Head lights(R)","Head lights(L)","Front Wheel(R)","Front door(R)","Side mirror(R)"]
             
             ######
@@ -257,15 +257,15 @@ if __name__ == "__main__":
             # damage
             print("make_cocoformat[damage]")
 
-            label_df = pd.read_csv('code/damage_labeling.csv')
+            label_df = pd.read_csv('../../code/damage_labeling.csv')
             label_df = label_df.loc[label_df.total_anns > 0]
             print(len(label_df))
 
             idx = 0
 
 
-            dir_name_img = 'data/Dataset/1.원천데이터/damage'
-            dir_name_label = 'data/Dataset/2.라벨링데이터/damage'
+            dir_name_img = '../../data/Dataset/1.원천데이터/VS_damage'
+            dir_name_label = '../../data/Dataset/2.라벨링데이터/VL_damage'
             l_sch = ["Scratched","Separated","Crushed","Breakage"]
 
             # training_data
@@ -281,7 +281,3 @@ if __name__ == "__main__":
                 test.coco_json()
 
 
-
-
-    
-    
